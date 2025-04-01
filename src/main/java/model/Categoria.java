@@ -11,5 +11,4 @@ public class Categoria {
     // Atributos
     private int id;
     private String nombre;
-
 }
