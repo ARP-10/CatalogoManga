@@ -1,9 +1,5 @@
-## Cosas a mejorar:
-Hacer un padre jdbc donde crear un metodo consulta() para llamarlo directamente desde cualquier dao ej obtenet todos(){consulta()} y asi no escribimos tanto codigo
+## Tareas:
 
-en el de javi: public Iterable<T> consula(String sql, Object... datos).......
+- Hacer mis propias excepciones, dividirlas por capas
 
-en resumen, hacer otros metodos para evitar tener que crear cada crud dentro de un nuevo dao.
-Mirar tamben el archivo fabrica, para conseguir hacer algo general
-
-Hacer mis propias excepciones, dividirlas por capas
+- Meter una query en AlquilerDAO que me permita SOLO actualizar el estado ? para actualizar de alquilado a no alquilado
