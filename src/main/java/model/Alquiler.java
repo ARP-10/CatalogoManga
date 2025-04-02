@@ -12,6 +12,7 @@ public class Alquiler {
 	private int id;
 	private Date fecha_inicio;
 	private Date fecha_fin;
-	private boolean estado;
+	private boolean alquilado;
+	private String dni_usuario;
 	
 }

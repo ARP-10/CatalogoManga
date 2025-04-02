@@ -14,7 +14,7 @@ import dao.CapituloDAO;
 import model.Capitulo;
 import util.DB_Connection;
 
-@WebServlet("/CapituloController")
+@WebServlet("/capitulos")
 public class CapituloController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CapituloDAO capituloDAO;
@@ -41,7 +41,7 @@ public class CapituloController extends HttpServlet {
 			Iterable<Capitulo> capitulos = capituloDAO.obtenerTodosCrud();
 			request.setAttribute("capitulos", capitulos);
 			// TODO: Cambiar el .jsp
-			request.getRequestDispatcher("/WEB-INF/view/pruebas.jsp").forward(request,  response);
+			request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request,  response);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -15,7 +15,7 @@ import dao.AlquilerDAO;
 import model.Alquiler;
 import util.DB_Connection;
 
-@WebServlet("/AlquilerController")
+@WebServlet("/alquileres")
 public class AlquilerController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AlquilerDAO alquilerDAO;
@@ -42,7 +42,7 @@ public class AlquilerController extends HttpServlet {
 			Iterable<Alquiler> alquileres = alquilerDAO.obtenerTodosCrud();
 			request.setAttribute("alquileres", alquileres);
 			// TODO: Cambiar el .jsp
-			request.getRequestDispatcher("/WEB-INF/view/pruebas.jsp").forward(request,  response);
+			request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request,  response);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -52,15 +52,17 @@ public class AlquilerController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Dónde cambiemos action por otro parámetro (crear, actualizar eliminar) en el .jsp entrará por aquí
 		String action = request.getParameter("action");
+		// TODO: Ajustar el actualizar a que solo cambie la fecha fin
 		try {
 			if ("crear".equals(action)) {
 				String fechaInicioStr = request.getParameter("fecha_inicio");
 				String fechaFinStr = request.getParameter("fecha_fin");
 				Date fechaInicio = Date.valueOf(fechaInicioStr); 
 				Date fechaFin = Date.valueOf(fechaFinStr);
-				boolean estado = Boolean.parseBoolean(request.getParameter("estado"));
+				boolean alquilado = Boolean.parseBoolean(request.getParameter("alquilado"));
+				String dni_usuario = request.getParameter("dni_usuario");
 
-				Alquiler nuevoAlquiler = new Alquiler(0, fechaInicio, fechaFin, estado);
+				Alquiler nuevoAlquiler = new Alquiler(0, fechaInicio, fechaFin, alquilado, dni_usuario);
 				alquilerDAO.crearNuevoCrud(nuevoAlquiler);
 				
 			} else if ("actualizar".equals(action)) {
@@ -69,8 +71,9 @@ public class AlquilerController extends HttpServlet {
 				String fechaFinStr = request.getParameter("fecha_fin");
 				Date fechaInicio = Date.valueOf(fechaInicioStr); 
 				Date fechaFin = Date.valueOf(fechaFinStr);
-				boolean estado = Boolean.parseBoolean(request.getParameter("estado"));
-				Alquiler alquilerActualizado = new Alquiler(id, fechaInicio, fechaFin, estado);
+				boolean alquilado = Boolean.parseBoolean(request.getParameter("alquilado"));
+				String dni_usuario = request.getParameter("dni_usuario");
+				Alquiler alquilerActualizado = new Alquiler(id, fechaInicio, fechaFin, alquilado, dni_usuario);
 				alquilerDAO.actualizarCrud(alquilerActualizado);
 				
 			}  else if ("eliminar".equals(action)) {

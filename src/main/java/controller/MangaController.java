@@ -41,7 +41,7 @@ public class MangaController extends HttpServlet {
 			Iterable<Manga> capitulos = mangaDAO.obtenerTodosCrud();
 			request.setAttribute("capitulos", capitulos);
 			// TODO: Cambiar el .jsp
-			request.getRequestDispatcher("/WEB-INF/view/pruebas.jsp").forward(request,  response);
+			request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request,  response);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

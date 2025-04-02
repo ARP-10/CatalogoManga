@@ -14,7 +14,7 @@ import dao.CategoriaDAO;
 import model.Categoria;
 import util.DB_Connection;
 
-@WebServlet("/CategoriaController")
+@WebServlet("/categorias")
 public class CategoriaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CategoriaDAO categoriaDAO;
@@ -41,7 +41,7 @@ public class CategoriaController extends HttpServlet {
 			Iterable<Categoria> categorias = categoriaDAO.obtenerTodosCrud();
 			request.setAttribute("categorias", categorias);
 			// TODO: Cambiar el .jsp
-			request.getRequestDispatcher("/WEB-INF/view/pruebas.jsp").forward(request,  response);
+			request.getRequestDispatcher("/WEB-INF/view/CategoriasView.jsp").forward(request,  response);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
