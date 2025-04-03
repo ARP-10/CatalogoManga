@@ -2,10 +2,11 @@
 <html>
 <head>
     <title>Biblioteca Manga</title>
+    <link rel="icon" href="assets/libro-abierto.png" type="image/x-icon">
     <!-- CSS de Bootstrap -->
-    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWERTY1234" crossorigin="anonymous">
 	<link href="assets/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 	
 </head>
 <body class="container">
@@ -15,7 +16,7 @@
         
         <!-- Botones centrados -->
         <div class="d-flex gap-3">
-            <button class="btn btn-primary" onclick="window.location.href='AlquileresView.jsp'">Ver alquileres</button>
+            <button class="btn btn-primary" onclick="window.location.href='alquileres'">Ver alquileres</button>
             <button class="btn btn-secondary" onclick="window.location.href='categorias'">Ver categorías</button>
         </div>
     </div>

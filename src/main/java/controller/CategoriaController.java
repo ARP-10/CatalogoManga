@@ -33,7 +33,7 @@ public class CategoriaController extends HttpServlet {
 	}
 
 
-       
+       // TODO: Hacer que cada boton lleve a una categoria concreta de la bbdd
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
