@@ -23,8 +23,10 @@
 
 		<!-- Título -->
 		<h2 class="text-center mb-5">Lista de Mangas</h2>
-		<div class="d-flex w-100 justify-content-end mb-3">
-			<button class="btn btn-success ms-auto"
+		<div class="d-flex w-100 justify-content-between mb-3">
+			<button class="btn btn-primary"
+				onclick="window.location.href='index'">Volver</button>
+			<button class="btn btn-success"
 				onclick="window.location.href='nuevoManga'">Nuevo</button>
 		</div>
 
@@ -38,22 +40,31 @@
 				</tr>
 			</thead>
 			<tbody>
-				<%
-				Iterable<Manga> capitulos = (Iterable<Manga>) request.getAttribute("capitulos");
-				for (Manga manga : capitulos) {
-				%>
-				<tr>
-					<td><%=manga.getId()%></td>
-					<td><%=manga.getTitulo()%></td>
-					<td><a href="mangas?action=actualizar&id=<%=manga.getId()%>"
-						class="btn btn-warning btn-sm">Actualizar</a> <a
-						href="mangas?action=eliminar&id=<%=manga.getId()%>"
-						class="btn btn-danger btn-sm">Eliminar</a></td>
-				</tr>
-				<%
-				}
-				%>
-			</tbody>
+    <%
+    Iterable<Manga> capitulos = (Iterable<Manga>) request.getAttribute("capitulos");
+    for (Manga manga : capitulos) {
+    %>
+    <tr>
+        <td><%=manga.getId()%></td>
+        <td><%=manga.getTitulo()%></td>
+        <td>
+            <!-- Botón para Actualizar -->
+            <form action="mangas" method="post" style="display:inline;">
+                <button class="btn btn-warning btn-sm" onclick="window.location.href='nuevoAlquiler'">Alquilar</button>
+            </form>
+            <!-- Botón para Eliminar -->
+            <form action="mangas" method="post" style="display:inline;">
+                <input type="hidden" name="action" value="eliminar">
+                <input type="hidden" name="id" value="<%=manga.getId()%>">
+                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+            </form>
+        </td>
+    </tr>
+    <%
+    }
+    %>
+</tbody>
+
 		</table>
 	</div>
 

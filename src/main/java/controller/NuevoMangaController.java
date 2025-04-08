@@ -29,43 +29,63 @@ public class NuevoMangaController extends HttpServlet {
             DB_Connection dbConnection = new DB_Connection();
             Connection conn = dbConnection.obtenerConexion();
             mangaDAO = new MangaDAO(conn);
-            categoriaDAO = new CategoriaDAO(conn); // Inicializamos el DAO para categorías
+            categoriaDAO = new CategoriaDAO(conn);
             System.out.println("Conexión a la base de datos inicializada correctamente.");
         } catch (SQLException | ClassNotFoundException e) {
             throw new ServletException("ERROR al inicializar la conexión a la BBDD", e);
         }
     }
 
+    private void cargarCategorias(HttpServletRequest request) throws SQLException {
+        List<Categoria> categorias = categoriaDAO.obtenerTodosCrud();
+        request.setAttribute("categorias", categorias);
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            // Obtener todas las categorías desde la base de datos
-            List<Categoria> categorias = categoriaDAO.obtenerTodosCrud();
-            request.setAttribute("categorias", categorias);  // Pasar las categorías al JSP
+            cargarCategorias(request);
+            request.getRequestDispatcher("/WEB-INF/view/NuevoMangaView.jsp").forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al cargar las categorías");
         }
-        
-        // Redirigir a la vista para crear un nuevo manga
-        request.getRequestDispatcher("/WEB-INF/view/NuevoMangaView.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String titulo = request.getParameter("titulo");
-        int categoriaId = Integer.parseInt(request.getParameter("categoria"));
-
         try {
-            // Crear un nuevo manga con la categoría seleccionada
+            String titulo = request.getParameter("titulo");
+            String categoriaStr = request.getParameter("categoria");
+            
+            if (titulo == null || titulo.trim().isEmpty()) {
+                request.setAttribute("error", "El título es obligatorio");
+                cargarCategorias(request);
+                request.getRequestDispatcher("/WEB-INF/view/NuevoMangaView.jsp").forward(request, response);
+                return;
+            }
+
+            if (categoriaStr == null || categoriaStr.trim().isEmpty()) {
+                request.setAttribute("error", "La categoría es obligatoria");
+                cargarCategorias(request);
+                request.getRequestDispatcher("/WEB-INF/view/NuevoMangaView.jsp").forward(request, response);
+                return;
+            }
+
+            int categoriaId = Integer.parseInt(categoriaStr);
             Manga nuevoManga = new Manga(0, titulo, categoriaId);
             mangaDAO.crearNuevoCrud(nuevoManga);
             
-            // Redirigir a la página de la lista de mangas
             response.sendRedirect(request.getContextPath() + "/mangas");
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al crear el nuevo manga");
+            try {
+                request.setAttribute("error", "Error al crear el manga: " + e.getMessage());
+                cargarCategorias(request);
+                request.getRequestDispatcher("/WEB-INF/view/NuevoMangaView.jsp").forward(request, response);
+            } catch (SQLException ex) {
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al procesar la solicitud");
+            }
         }
     }
 }

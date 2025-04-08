@@ -23,6 +23,13 @@
 	<!-- Título -->
 	<h2 class="text-center mb-5">Nuevo Manga</h2>
 
+        <!-- Mostrar errores si hay -->
+        <% if (request.getAttribute("error") != null) { %>
+            <div class="alert alert-danger">
+                <%= request.getAttribute("error") %>
+            </div>
+        <% } %>
+
 	<!-- Formulario para crear un nuevo manga -->
 	<form action="nuevoManga" method="post">
 		<div class="mb-3">
@@ -37,10 +44,12 @@
 				<option value="">Seleccione una categoría</option>
 				<%
 				List<Categoria> categorias = (List<Categoria>) request.getAttribute("categorias");
-				for (Categoria categoria : categorias) {
+				if (categorias != null) {
+				    for (Categoria categoria : categorias) {
 				%>
 				<option value="<%=categoria.getId()%>"><%=categoria.getNombre()%></option>
 				<%
+				    }
 				}
 				%>
 			</select>

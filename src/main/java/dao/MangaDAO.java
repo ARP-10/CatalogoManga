@@ -9,8 +9,8 @@ import java.util.List;
 
 public class MangaDAO extends BaseDAO<Manga> implements CrudDAO<Manga>{
     private static final String SELECT_MANGAS = "SELECT * FROM manga_db.mangas";
-    private static final String INSERT_MANGA = "INSERT INTO manga_db.mangas (titulo) VALUES (?)";
-    private static final String INSERT_MANGA_ID = "INSERT INTO manga_db.mangas (id, titulo) VALUES (?, ?)";
+    private static final String INSERT_MANGA = "INSERT INTO manga_db.mangas (titulo, id_categoria) VALUES (?, ?)";
+    private static final String INSERT_MANGA_ID = "INSERT INTO manga_db.mangas (id, titulo, id_categoria) VALUES (?, ?, ?)";
     private static final String UPDATE_MANGA = "UPDATE manga_db.mangas SET titulo = ? WHERE id = ?";
     private static final String DELETE_MANGA = "DELETE FROM manga_db.mangas WHERE id = ?";
 
@@ -20,7 +20,11 @@ public class MangaDAO extends BaseDAO<Manga> implements CrudDAO<Manga>{
 
     @Override
     protected Manga mapResultSetToEntity(ResultSet rs) throws SQLException {
-        return new Manga(rs.getInt("id"), rs.getString("titulo"));
+        return new Manga(
+            rs.getInt("id"), 
+            rs.getString("titulo"),
+            rs.getInt("id_categoria")
+        );
     }
 
     // Obtener todos los mangas
@@ -32,7 +36,7 @@ public class MangaDAO extends BaseDAO<Manga> implements CrudDAO<Manga>{
     // Crear un manga nuevo
     @Override
     public void crearNuevoCrud(Manga manga) throws SQLException {
-        crearNuevo(INSERT_MANGA, manga.getTitulo());
+        crearNuevo(INSERT_MANGA, manga.getTitulo(), manga.getId_categoria());
     }
 
     // Crear un manga nueva con un ID nuevo
@@ -40,6 +44,7 @@ public class MangaDAO extends BaseDAO<Manga> implements CrudDAO<Manga>{
         try (PreparedStatement ps = connection.prepareStatement(INSERT_MANGA_ID)) {
             ps.setInt(1, manga.getId());
             ps.setString(2, manga.getTitulo());
+            ps.setInt(3, manga.getId_categoria());
             ps.executeUpdate();
         }
     }
@@ -47,7 +52,7 @@ public class MangaDAO extends BaseDAO<Manga> implements CrudDAO<Manga>{
     // Actualizar una manga
     @Override
     public void actualizarCrud(Manga manga) throws SQLException {
-        actualizar(UPDATE_MANGA, manga.getTitulo());
+        actualizar(UPDATE_MANGA, manga.getTitulo(), manga.getId());
     }
 
     // Borrar un manga
