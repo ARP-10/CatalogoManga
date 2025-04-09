@@ -17,7 +17,7 @@
         <!-- Botones centrados -->
         <div class="d-flex gap-3">
             <button class="btn btn-primary" onclick="window.location.href='alquileres'">Ver alquileres</button>
-            <button class="btn btn-secondary" onclick="window.location.href='categorias'">Ver categorías</button>
+            <button class="btn btn-secondary" onclick="window.location.href='mangas'">Biblioteca</button>
         </div>
     </div>
 

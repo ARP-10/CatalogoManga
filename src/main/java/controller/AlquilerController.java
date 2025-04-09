@@ -37,13 +37,19 @@ public class AlquilerController extends HttpServlet {
        
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String action = request.getParameter("action");
 		try {
-			System.out.println("Obteniendo alquileres...");
-			// Obtener todos los capítulos
-			Iterable<Alquiler> alquileres = alquilerDAO.obtenerTodosCrud();
-			System.out.println("Alquileres obtenidos: " + (alquileres != null ? "sí" : "no"));
-			request.setAttribute("alquileres", alquileres);
-			request.getRequestDispatcher("/WEB-INF/view/AlquileresView.jsp").forward(request,  response);
+			if ("eliminar".equals(action)) {
+				int id = Integer.parseInt(request.getParameter("id"));
+	            alquilerDAO.borrarCrud(id);
+	            response.sendRedirect(request.getContextPath() + "/alquileres");
+			} else {
+				Iterable<Alquiler> alquileres = alquilerDAO.obtenerTodosCrud();
+				request.setAttribute("alquileres", alquileres);
+				request.getRequestDispatcher("/WEB-INF/view/AlquileresView.jsp").forward(request,  response);
+			}
+			
+			
 		} catch (SQLException e) {
 			System.err.println("Error al obtener alquileres: " + e.getMessage());
 			e.printStackTrace();

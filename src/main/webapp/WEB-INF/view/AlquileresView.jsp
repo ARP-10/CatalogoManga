@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="model.Alquiler, java.util.List" %>
+<%@ page import="model.Alquiler, java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,15 +21,13 @@
 		class="d-flex flex-column justify-content-center align-items-center">
 		<!-- Logo centrado -->
 		<img src="assets/logo.jpg" alt="Logo de la Biblioteca Manga"
-			style="max-width: 200px;">
+			style="max-width: 100px;">
 
 		<!-- Tabla de Alquileres -->
 		<h2 class="text-center mb-5">Lista de Alquileres</h2>
 		<div class="d-flex w-100 justify-content-between mb-3">
 			<button class="btn btn-primary"
 				onclick="window.location.href='index'">Volver</button>
-			<button class="btn btn-success"
-				onclick="window.location.href='nuevoManga'">Nuevo</button>
 		</div>
 
 		<table class="table table-striped">
@@ -39,31 +37,31 @@
 					<th>Título Manga</th>
 					<th>Fecha Inicio</th>
 					<th>Fecha Fin</th>
-					<th>Alquilado</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
 				<%
-				Iterable<Alquiler> alquileres = (Iterable<Alquiler>)request.getAttribute("alquileres");
-				if(alquileres != null) {
-					for(Alquiler alquiler : alquileres) {
+				Iterable<Alquiler> alquileres = (Iterable<Alquiler>) request.getAttribute("alquileres");
+				if (alquileres != null) {
+					for (Alquiler alquiler : alquileres) {
 				%>
-					<tr>
-						<td><%= alquiler.getDni_usuario() %></td>
-						<td><%= alquiler.getTitulo() %></td>
-						<td><%= alquiler.getFecha_inicio() %></td>
-						<td><%= alquiler.getFecha_fin() %></td>
-						<td><input type="checkbox" <%= alquiler.isAlquilado() ? "checked" : "" %> disabled></td>
-						<td>
-							<button class="btn btn-warning btn-sm"
-								onclick="">Editar</button>
-							<button class="btn btn-danger btn-sm"
-								onclick="">Eliminar</button>
-						</td>
-					</tr>
-				<% 
-					}
+				<tr>
+					<td><%=alquiler.getDni_usuario()%></td>
+					<td><%=alquiler.getTitulo()%></td>
+					<td><%=alquiler.getFecha_inicio()%></td>
+					<td><%=alquiler.getFecha_fin()%></td>
+					<td>
+						<button class="btn btn-warning btn-sm"
+							onclick="window.location.href='editarAlquiler?id=<%=alquiler.getId()%>'">Editar</button>
+
+						<button class="btn btn-danger btn-sm"
+							onclick="window.location.href='alquileres?action=eliminar&id=<%=alquiler.getId()%>'">Eliminar</button>
+
+					</td>
+				</tr>
+				<%
+				}
 				}
 				%>
 			</tbody>

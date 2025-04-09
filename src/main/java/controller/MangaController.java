@@ -34,8 +34,8 @@ public class MangaController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            Iterable<Manga> capitulos = mangaDAO.obtenerTodosCrud();
-            request.setAttribute("capitulos", capitulos);
+            Iterable<Manga> mangas = mangaDAO.obtenerTodosConAlquiler();
+            request.setAttribute("mangas", mangas);
             request.getRequestDispatcher("/WEB-INF/view/MangasView.jsp").forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -47,6 +47,7 @@ public class MangaController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         try {
+        	// TODO: revisar si se esat usando esta función
             if ("actualizar".equals(action)) {
                 int id = Integer.parseInt(request.getParameter("id"));
                 String titulo = request.getParameter("titulo");

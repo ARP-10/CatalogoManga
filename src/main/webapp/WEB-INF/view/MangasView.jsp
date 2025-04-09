@@ -36,34 +36,49 @@
 				<tr>
 					<th>ID</th>
 					<th>Título</th>
+					<th>Categoría</th>
+					<th>Aqluilado</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
-    <%
-    Iterable<Manga> capitulos = (Iterable<Manga>) request.getAttribute("capitulos");
-    for (Manga manga : capitulos) {
-    %>
-    <tr>
-        <td><%=manga.getId()%></td>
-        <td><%=manga.getTitulo()%></td>
-        <td>
-            <!-- Botón para Actualizar -->
-            <form action="mangas" method="post" style="display:inline;">
-                <button class="btn btn-warning btn-sm" onclick="window.location.href='nuevoAlquiler'">Alquilar</button>
-            </form>
-            <!-- Botón para Eliminar -->
-            <form action="mangas" method="post" style="display:inline;">
-                <input type="hidden" name="action" value="eliminar">
-                <input type="hidden" name="id" value="<%=manga.getId()%>">
-                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-            </form>
-        </td>
-    </tr>
-    <%
-    }
-    %>
-</tbody>
+				<%
+				Iterable<Manga> mangas = (Iterable<Manga>) request.getAttribute("mangas");
+				for (Manga manga : mangas) {
+				%>
+				<tr>
+					<td><%=manga.getId()%></td>
+					<td><%=manga.getTitulo()%></td>
+					<td><%=manga.getCategoria()%></td>
+					<td>
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" disabled
+								<%if (manga.isAlquilado()) {%> checked <%}%>>
+						</div>
+					</td>
+					<td>
+						<!-- Botón para Alquilar -->
+						<% if (!manga.isAlquilado()) { %>
+							<form action="nuevoAlquiler" method="get" style="display: inline;">
+							<input type="hidden" name="id" value="<%=manga.getId()%>">
+							<button class="btn btn-warning btn-sm">Alquilar</button>
+						</form>
+						<% } else { %>
+						<button class="btn btn-secondary btn-sm" disabled>Alquilar</button>
+						<% } %>
+
+						</form> <!-- Botón para Eliminar -->
+						<form action="mangas" method="post" style="display: inline;">
+							<input type="hidden" name="action" value="eliminar"> <input
+								type="hidden" name="id" value="<%=manga.getId()%>">
+							<button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+						</form>
+					</td>
+				</tr>
+				<%
+				}
+				%>
+			</tbody>
 
 		</table>
 	</div>

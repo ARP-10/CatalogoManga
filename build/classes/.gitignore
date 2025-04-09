@@ -1,4 +1,15 @@
-/dao/
+/.classpath
+/.idea/
+/.project
+/.settings/
+/Main.class
+/Notas.md
 /build/
-/src/
+/com/
 /controller/
+/dao/
+/model/
+/servlet/
+/src/
+/util/
+/viewSwing/
