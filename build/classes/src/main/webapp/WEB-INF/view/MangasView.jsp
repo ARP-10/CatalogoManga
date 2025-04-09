@@ -14,75 +14,84 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
 	rel="stylesheet">
 </head>
-<body class="container">
-	<div
-		class="d-flex flex-column justify-content-center align-items-center">
-		<!-- Logo centrado -->
-		<img src="assets/logo.jpg" alt="Logo de la Biblioteca Manga"
-			style="max-width: 100px;">
+<body>
+	<div class="container">
+		<header class="py-3 text-center border-bottom mb-4">
+			<img src="assets/logo.jpg" alt="Logo de la Biblioteca Manga"
+				style="max-width: 120px;" class="mb-2">
+			<h1 class="h4 text-dark">Lista de Mangas</h1>
+		</header>
 
-		<!-- Título -->
-		<h2 class="text-center mb-5">Lista de Mangas</h2>
-		<div class="d-flex w-100 justify-content-between mb-3">
-			<button class="btn btn-primary"
-				onclick="window.location.href='index'">Volver</button>
-			<button class="btn btn-success"
-				onclick="window.location.href='nuevoManga'">Nuevo</button>
+			<div class="d-flex justify-content-between align-items-center mb-3">
+				<button
+					class="btn btn-outline-primary d-flex align-items-center gap-2"
+					onclick="window.location.href='index'">
+					<i class="bi bi-arrow-left"></i> Volver
+				</button>
+				<button class="btn btn-success d-flex align-items-center gap-2"
+					onclick="window.location.href='nuevoManga'">
+					<i class="bi bi-plus-circle"></i> Nuevo Manga
+				</button>
+			</div>
+
+			<!-- Tabla de Mangas -->
+			<table class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Título</th>
+						<th>Categoría</th>
+						<th>Aqluilado</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+                <% 
+                Iterable<Manga> mangas = (Iterable<Manga>) request.getAttribute("mangas");
+                for (Manga manga : mangas) { 
+                %>
+                <tr>
+                    <td><%= manga.getId() %></td>
+                    <td><%= manga.getTitulo() %></td>
+                    <td><%= manga.getCategoria() %></td>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" disabled <%= manga.isAlquilado() ? "checked" : "" %>>
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <% if (!manga.isAlquilado()) { %>
+                            <form action="nuevoAlquiler" method="get" style="display: inline;">
+                                <input type="hidden" name="id" value="<%= manga.getId() %>">
+                                <button class="btn btn-warning btn-sm">
+                                    Alquilar
+                                </button>
+                            </form>
+                        <% } else { %>
+                            <button class="btn btn-secondary btn-sm" disabled>
+                                Alquilado
+                            </button>
+                        <% } %>
+                        <!-- Botón para Eliminar -->
+                        <form action="mangas" method="post" style="display: inline;">
+                            <input type="hidden" name="action" value="eliminar">
+                            <input type="hidden" name="id" value="<%= manga.getId() %>">
+                            <button type="submit" class="btn btn-danger btn-sm d-inline-flex align-items-center p-2">
+                <i class="bi bi-trash"></i> 
+            </button>
+                        </form>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+
+			</table>
 		</div>
 
-		<!-- Tabla de Mangas -->
-		<table class="table table-striped table-bordered">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Título</th>
-					<th>Categoría</th>
-					<th>Aqluilado</th>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%
-				Iterable<Manga> mangas = (Iterable<Manga>) request.getAttribute("mangas");
-				for (Manga manga : mangas) {
-				%>
-				<tr>
-					<td><%=manga.getId()%></td>
-					<td><%=manga.getTitulo()%></td>
-					<td><%=manga.getCategoria()%></td>
-					<td>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" disabled
-								<%if (manga.isAlquilado()) {%> checked <%}%>>
-						</div>
-					</td>
-					<td>
-						<!-- Botón para Alquilar -->
-						<% if (!manga.isAlquilado()) { %>
-							<form action="nuevoAlquiler" method="get" style="display: inline;">
-							<input type="hidden" name="id" value="<%=manga.getId()%>">
-							<button class="btn btn-warning btn-sm">Alquilar</button>
-						</form>
-						<% } else { %>
-						<button class="btn btn-secondary btn-sm" disabled>Alquilar</button>
-						<% } %>
-
-						</form> <!-- Botón para Eliminar -->
-						<form action="mangas" method="post" style="display: inline;">
-							<input type="hidden" name="action" value="eliminar"> <input
-								type="hidden" name="id" value="<%=manga.getId()%>">
-							<button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-						</form>
-					</td>
-				</tr>
-				<%
-				}
-				%>
-			</tbody>
-
-		</table>
-	</div>
-
+	<footer class="bg-dark text-white text-center py-3 mt-4">
+		<p class="mb-0">&copy; 2025 Biblioteca Manga. Todos los derechos
+			reservados.</p>
+	</footer>
 	<!-- Script de Bootstrap -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"

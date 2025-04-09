@@ -9,6 +9,8 @@
 /controller/
 /dao/
 /model/
+/package-lock.json
+/package.json
 /servlet/
 /src/
 /util/

@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Crear Nuevo Alquiler</title>
+<title>Editar  Alquiler</title>
 <link rel="icon" href="assets/libro-abierto.png" type="image/x-icon">
 <!-- Asegúrate de que el enlace a Bootstrap sea correcto -->
 <link
