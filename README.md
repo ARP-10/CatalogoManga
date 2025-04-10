@@ -47,19 +47,19 @@ Este sistema proporciona una forma eficiente y moderna de organizar los mangas d
 ## 📷 **Capturas de Pantalla**
 
 ### Inicio
-![Inicio](assets/screenshots/inicio.png)
+![Inicio](src/main/webapp/assets/screenshots/inicio.png)
 
 ### Lista de Mangas
-![Mangas](assets/screenshots/mangas.png)
+![Mangas](src/main/webapp/assets/screenshots/mangas.png)
 
 ### Confirmación eliminados
-![Confirmación eliminados](assets/screenshots/confirmacion.png)
+![Confirmación eliminados](src/main/webapp/assets/screenshots/confirmacion.png)
 
 ### Gestión de Alquileres
-![Gestión de Alquileres](assets/screenshots/alquileres.png)
+![Gestión de Alquileres](src/main/webapp/assets/screenshots/alquileres.png)
 
 ### Nuevo Manga
-![Nuevo Manga](assets/screenshots/nuevo.png)
+![Nuevo Manga](src/main/webapp/assets/screenshots/nuevo.png)
 
 ---
 
