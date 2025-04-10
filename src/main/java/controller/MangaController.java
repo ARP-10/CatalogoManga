@@ -47,17 +47,16 @@ public class MangaController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         try {
-        	// TODO: revisar si se esat usando esta función
             if ("actualizar".equals(action)) {
                 int id = Integer.parseInt(request.getParameter("id"));
                 String titulo = request.getParameter("titulo");
                 Manga mangaActualizado = new Manga(id, titulo);
                 mangaDAO.actualizarCrud(mangaActualizado);
-                response.sendRedirect(request.getContextPath() + "/mangas"); // Redirigir a la lista de mangas
+                response.sendRedirect(request.getContextPath() + "/mangas"); 
             } else if ("eliminar".equals(action)) {
                 int id = Integer.parseInt(request.getParameter("id"));
                 mangaDAO.borrarCrud(id);
-                response.sendRedirect(request.getContextPath() + "/mangas"); // Redirigir a la lista de mangas
+                response.sendRedirect(request.getContextPath() + "/mangas"); 
             }
         } catch (SQLException e) {
             e.printStackTrace();

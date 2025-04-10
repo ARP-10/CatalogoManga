@@ -5,23 +5,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Crear Nuevo Manga</title>
-<link rel="icon" href="assets/libro-abierto.png" type="image/x-icon">
-<!-- Asegúrate de que el enlace a Bootstrap sea correcto -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Crear Nuevo Manga</title>
+    <link rel="icon" href="assets/libro-abierto.png" type="image/x-icon">
+    <!-- CSS de Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
+          rel="stylesheet">
+    <link href="assets/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" 
+          rel="stylesheet">
 </head>
-<body class="container">
-	<div
-		class="d-flex flex-column justify-content-center align-items-center">
-		<!-- Logo centrado -->
-		<img src="assets/logo.jpg" alt="Logo de la Biblioteca Manga"
-			style="max-width: 100px;">
-	</div>
-	<!-- Título -->
-	<h2 class="text-center mb-5">Nuevo Manga</h2>
+<body>
+    <div class="container">
+        <!-- Logo centrado -->
+        <div class="d-flex flex-column justify-content-center align-items-center mb-4">
+            <img src="assets/logo.jpg" alt="Logo de la Biblioteca Manga" style="max-width: 100px;">
+            <h4 class="h4 text-dark">Nuevo Manga</h4>
+        </div>
+
 
         <!-- Mostrar errores si hay -->
         <% if (request.getAttribute("error") != null) { %>
@@ -30,34 +31,53 @@
             </div>
         <% } %>
 
-	<!-- Formulario para crear un nuevo manga -->
-	<form action="nuevoManga" method="post">
-		<div class="mb-3">
-			<label for="titulo" class="form-label">Título del Manga</label> <input
-				type="text" class="form-control" id="titulo" name="titulo" required>
-		</div>
+        <!-- Formulario para crear un nuevo manga -->
+        <form action="nuevoManga" method="post" class="container col-md-6 mx-auto bg-light p-4 rounded shadow">
+            <!-- Campo de título -->
+            <div class="mb-3">
+                <label for="titulo" class="form-label">Título del Manga</label>
+                <input type="text" class="form-control" id="titulo" name="titulo" required>
+            </div>
 
-		<!-- Desplegable con las categorías dinámicas -->
-		<div class="mb-3">
-			<label for="categoria" class="form-label">Categoría</label> <select
-				class="form-select" id="categoria" name="categoria" required>
-				<option value="">Seleccione una categoría</option>
-				<%
-				List<Categoria> categorias = (List<Categoria>) request.getAttribute("categorias");
-				if (categorias != null) {
-				    for (Categoria categoria : categorias) {
-				%>
-				<option value="<%=categoria.getId()%>"><%=categoria.getNombre()%></option>
-				<%
-				    }
-				}
-				%>
-			</select>
-		</div>
+            <!-- Desplegable con categorías dinámicas -->
+            <div class="mb-3">
+                <label for="categoria" class="form-label">Categoría</label>
+                <select class="form-select" id="categoria" name="categoria" required>
+                    <option value="">Seleccione una categoría</option>
+                    <%
+                    List<Categoria> categorias = (List<Categoria>) request.getAttribute("categorias");
+                    if (categorias != null) {
+                        for (Categoria categoria : categorias) {
+                    %>
+                    <option value="<%=categoria.getId()%>"><%=categoria.getNombre()%></option>
+                    <%
+                        }
+                    }
+                    %>
+                </select>
+            </div>
 
-		<!-- Botón de submit -->
-		<button type="submit" class="btn btn-success">Crear Manga</button>
-	</form>
+            <!-- Botones -->
+            <div class="d-flex justify-content-between mt-4">
+                <!-- Botón de Crear -->
+                <button type="submit" class="btn btn-success d-flex align-items-center gap-2">
+                    <i class="bi bi-check-circle"></i> Crear Manga
+                </button>
 
+                <!-- Botón de Volver -->
+                <button type="button" class="btn btn-outline-primary d-flex align-items-center gap-2" 
+                        onclick="window.location.href='<%= request.getContextPath() %>/mangas'">
+                    <i class="bi bi-arrow-left"></i> Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <footer class="bg-dark text-white text-center py-3 mt-4">
+        <p class="mb-0">&copy; 2025 Biblioteca Manga. Alejandra Rodríguez.</p>
+    </footer>
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
