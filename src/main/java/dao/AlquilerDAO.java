@@ -16,7 +16,6 @@ public class AlquilerDAO extends BaseDAO<Alquiler> implements CrudDAO<Alquiler>{
     private static final String UPDATE_ALQUILER_DATE = "UPDATE alquileres SET fecha_fin = ? WHERE id = ?";
     private static final String DELETE_ALQUILER = "DELETE FROM manga_db.alquileres WHERE id = ?";
 	
-    // TODO: Meter que SOLO se pueda actualizar el estado??
     
 	public AlquilerDAO(Connection connection) {
 		super(connection);

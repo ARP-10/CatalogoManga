@@ -8,5 +8,4 @@ public interface CrudDAO <T>{
     void actualizarCrud(T entity) throws SQLException;
     void borrarCrud(int id) throws SQLException;
 
-    // TODO: crearConId(T entity):
 }

@@ -21,7 +21,7 @@ public class CapituloController extends HttpServlet {
 	
 	@Override
 	public void init() throws ServletException {
-		// Se inicializa la conexión a la BBDD
+	
 		try {
 			DB_Connection dbConnection = new DB_Connection();
 			Connection conn = dbConnection.obtenerConexion();
@@ -37,10 +37,10 @@ public class CapituloController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			// Obtener todos los capítulos
+			
 			Iterable<Capitulo> capitulos = capituloDAO.obtenerTodosCrud();
 			request.setAttribute("capitulos", capitulos);
-			// TODO: Cambiar el .jsp
+		
 			request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request,  response);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -49,7 +49,7 @@ public class CapituloController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Dónde cambiemos action por otro parámetro (crear, actualizar eliminar) en el .jsp entrará por aquí
+		
 		String action = request.getParameter("action");
 		try {
 			if ("crear".equals(action)) {

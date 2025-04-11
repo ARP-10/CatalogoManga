@@ -27,7 +27,6 @@
             </button>
         </div>
 
-        <!-- Tabla de Mangas -->
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
@@ -65,7 +64,7 @@
                                 Alquilar
                             </button>
                         <% } %>
-                        <!-- Botón para Mostrar el Modal de Confirmación -->
+                    
                         <button type="button" class="btn btn-danger btn-sm d-inline-flex align-items-center p-2"
                                 data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
                                 onclick="setDeleteData(<%= manga.getId() %>, '<%= manga.getTitulo() %>')">
@@ -78,7 +77,7 @@
         </table>
     </div>
 
-    <!-- Modal de Confirmación -->
+
     <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -101,7 +100,7 @@
         </div>
     </div>
 
-    <!-- Script de Bootstrap -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Función para actualizar el modal con los datos del manga

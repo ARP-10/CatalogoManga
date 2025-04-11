@@ -21,48 +21,47 @@
 </head>
 <body>
     <div class="container">
-        <!-- Encabezado -->
+      
         <header class="py-3 text-center border-bottom mb-4">
             <img src="assets/logo.jpg" alt="Logo de la Biblioteca Manga" 
                  class="mb-2" style="max-width: 100px;">
             <h4 class="h4 text-dark">Editar Alquiler</h4>
         </header>
 
-        <!-- Formulario -->
+  
         <form method="post" action="<%= request.getContextPath() %>/editarAlquiler" 
               class="container col-md-6 mx-auto bg-light p-4 rounded shadow">
-            <!-- Campo oculto para el ID del alquiler -->
+          
             <input type="hidden" name="id" value="<%= alquiler.getId() %>">
 
-            <!-- Mostrar el DNI del usuario -->
+      
             <div class="mb-3">
                 <label for="dni_usuario" class="form-label">DNI Usuario</label>
                 <input type="text" class="form-control" id="dni_usuario" 
                        name="dni_usuario" value="<%= alquiler.getDni_usuario() %>" readonly>
             </div>
 
-            <!-- Mostrar el título del manga -->
             <div class="mb-3">
                 <label for="titulo" class="form-label">Título Manga</label>
                 <input type="text" class="form-control" id="titulo" 
                        name="titulo" value="<%= alquiler.getTitulo() %>" readonly>
             </div>
 
-            <!-- Mostrar la fecha de inicio -->
+ 
             <div class="mb-3">
                 <label for="fecha_inicio" class="form-label">Fecha Inicio</label>
                 <input type="date" class="form-control" id="fecha_inicio" 
                        name="fecha_inicio" value="<%= alquiler.getFecha_inicio() %>" readonly>
             </div>
 
-            <!-- Campo para editar la fecha de fin -->
+    
             <div class="mb-3">
                 <label for="fecha_fin" class="form-label">Fecha Fin</label>
                 <input type="date" class="form-control" id="fecha_fin" 
                        name="fecha_fin" value="<%= alquiler.getFecha_fin() %>" required>
             </div>
 
-            <!-- Botones -->
+     
             <div class="d-flex justify-content-between mt-4">
                 <button type="submit" class="btn btn-success d-flex align-items-center gap-2">
                     <i class="bi bi-check-circle"></i> Guardar
@@ -75,7 +74,7 @@
         </form>
     </div>
 
-    <!-- Pie de página -->
+
     <footer class="bg-dark text-white text-center py-3 mt-4">
         <p class="mb-0">&copy; 2025 Biblioteca Manga. Todos los derechos reservados.</p>
     </footer>

@@ -33,14 +33,11 @@ public class EditarAlquilerController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            // Obtener el ID del alquiler desde la URL
             int id = Integer.parseInt(request.getParameter("id"));
 
-            // Consultar el alquiler en la base de datos
             Alquiler alquiler = alquilerDAO.obtenerPorId(id);
 
             if (alquiler != null) {
-                // Pasar el alquiler al JSP
                 request.setAttribute("alquiler", alquiler);
                 request.getRequestDispatcher("/WEB-INF/view/EditarAlquilerView.jsp").forward(request, response);
             } else {
@@ -57,15 +54,12 @@ public class EditarAlquilerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            // Obtener el ID y la nueva fecha_fin desde el formulario
             int id = Integer.parseInt(request.getParameter("id"));
             String fechaFinStr = request.getParameter("fecha_fin");
 
-            // Actualizar solo la fecha_fin
             java.sql.Date fechaFin = java.sql.Date.valueOf(fechaFinStr);
             alquilerDAO.actualizarFechaFin(id, fechaFin);
 
-            // Redirigir al listado de alquileres
             response.sendRedirect(request.getContextPath() + "/alquileres");
         } catch (SQLException e) {
             e.printStackTrace();

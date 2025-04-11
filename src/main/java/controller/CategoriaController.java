@@ -21,7 +21,7 @@ public class CategoriaController extends HttpServlet {
 	
 	@Override
 	public void init() throws ServletException {
-		// Se inicializa la conexión a la BBDD
+		
 		try {
 			DB_Connection dbConnection = new DB_Connection();
 			Connection conn = dbConnection.obtenerConexion();
@@ -33,14 +33,14 @@ public class CategoriaController extends HttpServlet {
 	}
 
 
-       // TODO: Hacer que cada boton lleve a una categoria concreta de la bbdd
+      
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			// Obtener todas las categorías
+
 			Iterable<Categoria> categorias = categoriaDAO.obtenerTodosCrud();
 			request.setAttribute("categorias", categorias);
-			// TODO: Cambiar el .jsp
+			
 			request.getRequestDispatcher("/WEB-INF/view/CategoriasView.jsp").forward(request,  response);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -49,7 +49,7 @@ public class CategoriaController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Dónde cambiemos action por otro parámetro (crear, actualizar eliminar) en el .jsp entrará por aquí
+		
 		String action = request.getParameter("action");
 		try {
 			if ("crear".equals(action)) {

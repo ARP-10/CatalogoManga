@@ -15,13 +15,13 @@
 </head>
 <body>
     <div class="container">
-        <!-- Encabezado -->
+       
         <header class="py-3 text-center border-bottom mb-4">
             <img src="assets/logo.jpg" alt="Logo de la Biblioteca Manga" class="mb-2" style="max-width: 120px;">
             <h1 class="h4 text-dark">Gestión de Alquileres</h1>
         </header>
 
-        <!-- Botones de acción -->
+     
         <div class="d-flex justify-content-between align-items-center mb-3">
             <button class="btn btn-outline-primary d-flex align-items-center gap-2"
                     onclick="window.location.href='index'">
@@ -29,7 +29,7 @@
             </button>
         </div>
 
-        <!-- Tabla de Alquileres -->
+      
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
                 <tr>
@@ -52,12 +52,12 @@
                     <td><%= alquiler.getFecha_inicio() %></td>
                     <td><%= alquiler.getFecha_fin() %></td>
                     <td class="text-center">
-                        <!-- Botón Editar -->
+                     
                         <button class="btn btn-warning btn-sm"
                                 onclick="window.location.href='editarAlquiler?id=<%= alquiler.getId() %>'">
                             Editar
                         </button>
-                        <!-- Botón para Mostrar el Modal de Confirmación -->
+                        
                         <button type="button" class="btn btn-danger btn-sm d-inline-flex align-items-center gap-2"
                                 data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
                                 onclick="setDeleteData(<%= alquiler.getId() %>, '<%= alquiler.getTitulo() %>')">
@@ -77,7 +77,7 @@
         </table>
     </div>
 
-    <!-- Modal de Confirmación -->
+ 
     <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

@@ -22,7 +22,7 @@ public class AlquilerController extends HttpServlet {
 	
 	@Override
 	public void init() throws ServletException {
-		// Se inicializa la conexión a la BBDD
+		
 		try {
 			DB_Connection dbConnection = new DB_Connection();
 			Connection conn = dbConnection.obtenerConexion();
@@ -42,7 +42,7 @@ public class AlquilerController extends HttpServlet {
 			if ("eliminar".equals(action)) {
 				int id = Integer.parseInt(request.getParameter("id"));
 	            alquilerDAO.borrarCrud(id);
-	            response.sendRedirect(request.getContextPath() + "/alquileres");
+	            response.sendRedirect(request.getContextPath() + "/alquileres"); // Al eliminar un elemento, redirige a /alquileres
 			} else {
 				Iterable<Alquiler> alquileres = alquilerDAO.obtenerTodosCrud();
 				request.setAttribute("alquileres", alquileres);
@@ -59,9 +59,9 @@ public class AlquilerController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Dónde cambiemos action por otro parámetro (crear, actualizar eliminar) en el .jsp entrará por aquí
+
 		String action = request.getParameter("action");
-		// TODO: Ajustar el actualizar a que solo cambie la fecha fin
+		
 		try {
 			if ("crear".equals(action)) {
 			    String fechaInicioStr = request.getParameter("fecha_inicio");
@@ -77,17 +77,17 @@ public class AlquilerController extends HttpServlet {
 			    alquilerDAO.crearNuevoCrud(nuevoAlquiler);
 
 			}  else if ("actualizar".equals(action)) {
-			    int id = Integer.parseInt(request.getParameter("id")); // ID del alquiler
+			    int id = Integer.parseInt(request.getParameter("id")); 
 			    String fechaInicioStr = request.getParameter("fecha_inicio");
 			    String fechaFinStr = request.getParameter("fecha_fin");
 			    Date fechaInicio = Date.valueOf(fechaInicioStr); 
 			    Date fechaFin = Date.valueOf(fechaFinStr);
 			    boolean alquilado = Boolean.parseBoolean(request.getParameter("alquilado"));
 			    String dni_usuario = request.getParameter("dni_usuario");
-			    int idManga = Integer.parseInt(request.getParameter("id_manga")); // Obtén el id_manga
+			    int idManga = Integer.parseInt(request.getParameter("id_manga")); 
 			    String titulo = request.getParameter("titulo");
 
-			    // Construye el objeto Alquiler con el id_manga incluido
+			    
 			    Alquiler alquilerActualizado = new Alquiler(id, fechaInicio, fechaFin, alquilado, dni_usuario, idManga, titulo);
 			    alquilerDAO.actualizarCrud(alquilerActualizado);
 

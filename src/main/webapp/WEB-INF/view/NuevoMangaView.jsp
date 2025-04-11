@@ -17,29 +17,25 @@
 </head>
 <body>
     <div class="container">
-        <!-- Logo centrado -->
+      
         <div class="d-flex flex-column justify-content-center align-items-center mb-4">
             <img src="assets/logo.jpg" alt="Logo de la Biblioteca Manga" style="max-width: 100px;">
             <h4 class="h4 text-dark">Nuevo Manga</h4>
         </div>
 
-
-        <!-- Mostrar errores si hay -->
         <% if (request.getAttribute("error") != null) { %>
             <div class="alert alert-danger">
                 <%= request.getAttribute("error") %>
             </div>
         <% } %>
 
-        <!-- Formulario para crear un nuevo manga -->
         <form action="nuevoManga" method="post" class="container col-md-6 mx-auto bg-light p-4 rounded shadow">
-            <!-- Campo de título -->
+           
             <div class="mb-3">
                 <label for="titulo" class="form-label">Título del Manga</label>
                 <input type="text" class="form-control" id="titulo" name="titulo" required>
             </div>
 
-            <!-- Desplegable con categorías dinámicas -->
             <div class="mb-3">
                 <label for="categoria" class="form-label">Categoría</label>
                 <select class="form-select" id="categoria" name="categoria" required>
@@ -57,14 +53,12 @@
                 </select>
             </div>
 
-            <!-- Botones -->
             <div class="d-flex justify-content-between mt-4">
-                <!-- Botón de Crear -->
+             
                 <button type="submit" class="btn btn-success d-flex align-items-center gap-2">
                     <i class="bi bi-check-circle"></i> Crear Manga
                 </button>
-
-                <!-- Botón de Volver -->
+ 
                 <button type="button" class="btn btn-outline-primary d-flex align-items-center gap-2" 
                         onclick="window.location.href='<%= request.getContextPath() %>/mangas'">
                     <i class="bi bi-arrow-left"></i> Cancelar

@@ -32,13 +32,11 @@ public class MangaDAO extends BaseDAO<Manga> implements CrudDAO<Manga>{
         );
     }
 
-    // Obtener todos los mangas
     @Override
     public List<Manga> obtenerTodosCrud() throws SQLException {
         return obtenerTodos(SELECT_MANGAS);
     }
     
- // Obtener todos los mangas junto con la información de si están alquilados
     public List<Manga> obtenerTodosConAlquiler() throws SQLException {
         try (PreparedStatement ps = connection.prepareStatement(SELECT_MANGAS_ALQUILER)) {
             ResultSet rs = ps.executeQuery();
@@ -57,7 +55,6 @@ public class MangaDAO extends BaseDAO<Manga> implements CrudDAO<Manga>{
         }
     }
     
-    // Para poder mostrarlo en el jsp al crear un nuevo alquiler o editarlo
     public String obtenerTituloPorId(int id) throws SQLException {
         
         try (PreparedStatement ps = connection.prepareStatement(SELECT_TITULO_ID)) {
@@ -71,13 +68,11 @@ public class MangaDAO extends BaseDAO<Manga> implements CrudDAO<Manga>{
     }
 
 
-    // Crear un manga nuevo
     @Override
     public void crearNuevoCrud(Manga manga) throws SQLException {
         crearNuevo(INSERT_MANGA, manga.getTitulo(), manga.getId_categoria());
     }
 
-    // Crear un manga nueva con un ID nuevo
     public void crearMangaId(Manga manga) throws SQLException {
         try (PreparedStatement ps = connection.prepareStatement(INSERT_MANGA_ID)) {
             ps.setInt(1, manga.getId());
@@ -87,13 +82,11 @@ public class MangaDAO extends BaseDAO<Manga> implements CrudDAO<Manga>{
         }
     }
 
-    // Actualizar una manga
     @Override
     public void actualizarCrud(Manga manga) throws SQLException {
         actualizar(UPDATE_MANGA, manga.getTitulo(), manga.getId());
     }
 
-    // Borrar un manga
     @Override
     public void borrarCrud(int id) throws SQLException {
         borrar(DELETE_MANGA, id);

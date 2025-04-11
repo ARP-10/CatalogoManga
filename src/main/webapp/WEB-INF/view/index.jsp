@@ -61,7 +61,6 @@ footer {
 		</div>
 
 
-		<!-- Tarjeta con botones -->
 		<div class="card shadow mb-2">
 			<div class="card-body text-center">
 				<h2 class="h5 mb-4">Explora la Biblioteca</h2>
@@ -78,14 +77,8 @@ footer {
 
 			</div>
 		</div>
-
-
-
-
-
-
 	</div>
-	<!-- Pie de página -->
+
 	<footer class="bg-dark text-white text-center py-3 mt-4">
 
 		<p class="mb-0">&copy; 2025 Biblioteca Manga. Alejandra Rodríguez</p>

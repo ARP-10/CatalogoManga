@@ -68,7 +68,7 @@ public class NuevoAlquilerController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    try {
-	        // Obtén los valores desde el formulario
+	        // Obtener los valores desde el formulario
 	        String idMangaStr = request.getParameter("id_manga");
 	        String fechaInicioStr = request.getParameter("fecha_inicio");
 	        String fechaFinStr = request.getParameter("fecha_fin");
@@ -94,20 +94,16 @@ public class NuevoAlquilerController extends HttpServlet {
 	            return;
 	        }
 
-	        // Conversión de parámetros
 	        int idManga = Integer.parseInt(idMangaStr);
 	        java.sql.Date fechaInicio = java.sql.Date.valueOf(fechaInicioStr);
 	        java.sql.Date fechaFin = java.sql.Date.valueOf(fechaFinStr);
 
-	        // Guardar el nuevo alquiler usando el DAO
 	        alquilerDAO.crearNuevoAlquiler(idManga, fechaInicio, fechaFin, dniUsuario, true);
 
-	        // Redirigir al listado de alquileres tras guardar con éxito
 	        response.sendRedirect(request.getContextPath() + "/alquileres");
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 
-	        // Maneja errores de base de datos
 	        request.setAttribute("error", "Error al guardar el alquiler: " + e.getMessage());
 	        request.setAttribute("mangaTitulo", request.getAttribute("mangaTitulo")); 
 	        request.getRequestDispatcher("/WEB-INF/view/NuevoAlquilerView.jsp").forward(request, response);

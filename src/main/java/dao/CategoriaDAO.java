@@ -24,19 +24,16 @@ public class CategoriaDAO extends BaseDAO<Categoria> implements CrudDAO<Categori
         return new Categoria(rs.getInt("id"), rs.getString("nombre"));
     }
 
-    // Obtener todas las categorias
     @Override
     public List<Categoria> obtenerTodosCrud() throws SQLException {
         return obtenerTodos(SELECT_CATEGORIAS);
     }
 
-    // Crear una categoria nueva
     @Override
     public void crearNuevoCrud(Categoria categoria) throws SQLException {
         crearNuevo(INSERT_CATEGORIA, categoria.getNombre());
     }
 
-    // Crear una categoria nueva con un ID nuevo
     public void crearCategoriaId(Categoria categoria) throws SQLException {
         try (PreparedStatement ps = connection.prepareStatement(INSERT_CATEGORIA_ID)) {
             ps.setInt(1, categoria.getId());
@@ -45,13 +42,11 @@ public class CategoriaDAO extends BaseDAO<Categoria> implements CrudDAO<Categori
         }
     }
 
-    // Actualizar una categoria
     @Override
     public void actualizarCrud(Categoria categoria) throws SQLException {
         actualizar(UPDATE_CATEGORIA, categoria.getNombre(), categoria.getId());
     }
 
-    // Borrar una categoria
     @Override
     public void borrarCrud(int id) throws SQLException {
         borrar(DELETE_CATEGORIA, id);

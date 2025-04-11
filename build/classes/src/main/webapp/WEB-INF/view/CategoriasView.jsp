@@ -18,10 +18,10 @@
 		</div>
 		<h2 class="text-center mb-5">Categorías Disponibles</h2>
 
-		<!-- Contenedor para los botones -->
+		
 		<div
 			class="d-flex flex-column justify-content-center align-items-center">
-			<!-- Fila de botones -->
+		
 			<div class="d-flex justify-content-center gap-3 mb-3">
 				<button class="btn btn-outline-primary"
 					onclick="window.location.href='mangas'">Seinen</button>
@@ -38,7 +38,7 @@
 			</div>
 		</div>
 
-		<!-- Botón de volver centrado -->
+
 		<div class="d-flex justify-content-center mt-5">
 			<button class="btn btn-primary"
 				onclick="window.location.href='index'">Volver</button>
